@@ -1,8 +1,9 @@
 var fs = require('fs')
 var path = require('path')
 var Handlebars = require('handlebars')
-var moment = require('moment')
-var pluralize = require('pluralize')
+var luxon = require('luxon')
+
+luxon.Settings.defaultLocale("pl")
 
 function render (resume) {
   var css = fs.readFileSync(path.join(__dirname, '/style.css'), 'utf-8')
@@ -10,18 +11,19 @@ function render (resume) {
   var partialsDir = path.join(__dirname, 'partials')
   var filenames = fs.readdirSync(partialsDir)
 
+
   Handlebars.registerHelper({
     formatDate: function (date) {
       if (typeof date === 'undefined') {
         return 'now'
       }
-      return moment(date).format('MMM YYYY')
+      return luxon.DateTime.fromISO(date).toFormat('LLL yyyy')
     },
     formatDateYear: function (date) {
       if (typeof date === 'undefined') {
         return 'now'
       }
-      return moment(date).format('YYYY')
+      return luxon.DateTime.fromISO(date).toFormat("YYYY")
     },
     networkIcon: function (network) {
       if (network === 'StackOverflow') {
@@ -30,10 +32,12 @@ function render (resume) {
         return network.toLowerCase()
       }
     },
+
     wordWrap: function (str) {
       str = str.replace(/\//g, "/ ");
       return str.replace("/ / ", "//");
     },
+
     dateDiff: function (startDate, endDate) {
       let text = ''
       startDate = moment(startDate)
@@ -42,6 +46,8 @@ function render (resume) {
       } else {
         endDate = moment(endDate)
       }
+
+
       let years = endDate.diff(startDate, 'years')
       startDate.add(years, 'years')
       let months = endDate.diff(startDate, 'months')
