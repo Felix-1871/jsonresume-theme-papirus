@@ -1,0 +1,24 @@
+{
+  "name": "jsonresume-theme-papirus-feli",
+  "version": "0.0.6",
+  "description": "Papirus theme for JSON Resume",
+  "author": "Felix Manning",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Felix-1871/jsonresume-theme-papirus"
+  },
+  "keywords": [
+    "jsonresume",
+    "jsonresume-theme",
+    "jsonresume-theme-papirus",
+    "papirus",
+    "felix1871"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "handlebars": "^2.0.0-alpha.4",
+    "html-pdf": "^2.2.0",
+    "moment": "^2.19.1",
+    "pluralize": "^7.0.0"
+  }
+}
