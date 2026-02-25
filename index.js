@@ -46,14 +46,32 @@ function render (resume) {
       startDate.add(years, 'years')
       let months = endDate.diff(startDate, 'months')
 
-      if (years > 0) {
-        text += `${years} ${pluralize('years', years)}`
+      switch (years%10) {
+        case 1:
+          text += `${years} rok`
+          break;
+        case years < 5:
+          text += `${years} lata`
+          break;
+        case 0:
+          break;
+        default:
+          text += `${years} lat`
       }
       if (months > 0) {
         if (years > 0) {
           text += ' '
         }
-        text += `${months} ${pluralize('months', months)}`
+        switch (months%10) {
+        case 1:
+          text += `${months} miesiąc`
+          break;
+        case months < 5:
+          text += `${months} miesiące`
+          break;
+        default:
+          text += `${month} miesięcy`
+      }
       }
 
       return text
