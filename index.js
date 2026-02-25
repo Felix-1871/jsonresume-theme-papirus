@@ -70,7 +70,7 @@ function render (resume) {
           text += `${months} miesiące`
           break;
         default:
-          text += `${month} miesięcy`
+          text += `${months} miesięcy`
       }
       }
 
