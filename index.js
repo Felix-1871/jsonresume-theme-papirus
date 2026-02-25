@@ -3,7 +3,7 @@ var path = require('path')
 var Handlebars = require('handlebars')
 var luxon = require('luxon')
 
-luxon.Settings.defaultLocale("pl")
+luxon.Settings.defaultLocale = "pl"
 
 function render (resume) {
   var css = fs.readFileSync(path.join(__dirname, '/style.css'), 'utf-8')
@@ -23,7 +23,7 @@ function render (resume) {
       if (typeof date === 'undefined') {
         return 'now'
       }
-      return luxon.DateTime.fromISO(date).toFormat("YYYY")
+      return luxon.DateTime.fromISO(date).toFormat("yyyy")
     },
     networkIcon: function (network) {
       if (network === 'StackOverflow') {
@@ -40,17 +40,17 @@ function render (resume) {
 
     dateDiff: function (startDate, endDate) {
       let text = ''
-      startDate = moment(startDate)
+      startDate = luxon.DateTime.fromISO(startDate)
       if (endDate === null || endDate === '' || endDate === undefined) {
-        endDate = moment()
+        endDate = luxon.DateTime.now()
       } else {
-        endDate = moment(endDate)
+        endDate = luxon.DateTime.fromISO(endDate)
       }
 
-
-      let years = endDate.diff(startDate, 'years')
-      startDate.add(years, 'years')
-      let months = endDate.diff(startDate, 'months')
+      let dateDiff = endDate.diff(startDate, ['years', 'months', 'days']) 
+//days are added to hide decimals in case date includes not full months
+      let years = dateDiff.years
+      let months = dateDiff.months
 
       switch (years%10) {
         case 1:
@@ -79,7 +79,6 @@ function render (resume) {
           text += `${months} miesięcy`
       }
       }
-
       return text
     }
   })
