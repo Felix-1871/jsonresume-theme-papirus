@@ -14,6 +14,10 @@ body {
   border-radius: 5px;
   border: 1px solid #C7C7C7;
   overflow: hidden;
+  display:flex;
+  /* .content comes first in resume.hbs so PDF text extractors read it first */
+  flex-direction: row-reverse;
+  min-height: 29.7cm;
 }
 
 section {
@@ -48,8 +52,8 @@ section {
 .sidebar {
   padding: 2rem;
   background: #333438 !important;
-  margin-bottom: -99999px;
-  padding-bottom: 99999px;
+  margin-bottom: 0;
+  padding-bottom: 2rem !important;
 }
 
 .sidebar, .sidebar h1, .sidebar h2 {
@@ -60,7 +64,7 @@ section {
   text-transform: uppercase;
   text-align: center;
   font-size: 1.5rem;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.05em; /* above ~0.1em, PDF text extractors split words into letters */
   font-weight: bold;
   margin-top: 5rem;
 }
@@ -118,8 +122,8 @@ section {
 .content {
   padding: 5rem;
   background: #FFFFFF;
-  margin-bottom: -99999px;
-  padding-bottom: 99999px;
+  margin-bottom: 0;
+  padding-bottom: 5rem;
 }
 
 .content h1 {
@@ -127,7 +131,7 @@ section {
   text-transform: uppercase;
   text-align: center;
   font-size: 4rem;
-  letter-spacing: 1.0rem;
+  letter-spacing: 0.05em;
   font-weight: bold;
 }
 
@@ -136,7 +140,7 @@ section {
   text-transform: uppercase;
   text-align: left;
   font-size: 1.5rem;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.05em;
   font-weight: bold;
   margin-top: 5rem;
 }
@@ -156,7 +160,7 @@ section {
   text-transform: uppercase;
   text-align: center;
   font-size: 1.5rem;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.05em;
   font-weight: bold;
   margin-top: 5rem;
 }
@@ -300,7 +304,11 @@ section {
 .section-contact ul.profiles li {
   margin: 1rem 0 1rem 0;
 }
-
+.gdpr p{
+  font-size: 0.8rem;
+  color: #cfcfcf;
+  text-align: center;
+}
 /* Print */
 @media print {
   body {
@@ -317,6 +325,8 @@ section {
   #resume {
     overflow: hidden;
     border: none !important;
+    /* bootstrap's .row margins make the page wider than A4, and Chrome then shrinks it to fit */
+    margin: 0;
   }
 
   section {
@@ -351,8 +361,6 @@ section {
   .sidebar {
     padding: 2rem;
     background: #333438 !important;
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
 		color: #ffffff !important;
   }
 
@@ -364,7 +372,7 @@ section {
     text-transform: uppercase;
     text-align: center;
     font-size: 1.5rem;
-    letter-spacing: 0.5rem;
+    letter-spacing: 0.05em;
     font-weight: bold;
     margin-top: 5rem;
 		color: #ffffff !important;
@@ -438,8 +446,6 @@ section {
   .content {
     padding: 3rem 5rem 3rem 2rem;
     background: #FFFFFF !important;
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
   }
 
   .content h1 {
@@ -447,7 +453,7 @@ section {
     text-transform: uppercase;
     text-align: center;
     font-size: 2.5rem;
-    letter-spacing: 1.0rem;
+    letter-spacing: 0.05em;
     font-weight: bold;
   }
 
@@ -456,7 +462,7 @@ section {
     text-transform: uppercase;
     text-align: left;
     font-size: 1.2rem;
-    letter-spacing: 0.5rem;
+    letter-spacing: 0.05em;
     font-weight: bold;
     margin-top: 2rem;
   }
@@ -476,7 +482,7 @@ section {
     text-transform: uppercase;
     text-align: center;
     font-size: 1.2rem;
-    letter-spacing: 0.5rem;
+    letter-spacing: 0.05em;
     font-weight: bold;
     margin-top: 3rem;
   }
@@ -647,5 +653,9 @@ section {
       white-space: pre-wrap;
       color: #ffffff !important;
   }
-
+  .gdpr p {
+    font-size: 0.8rem;
+    color: #cfcfcf !important;
+    text-align: center;
+}
 }
