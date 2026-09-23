@@ -321,6 +321,8 @@ section {
   #resume {
     overflow: hidden;
     border: none !important;
+    /* bootstrap's .row margins make the page wider than A4, and Chrome then shrinks it to fit */
+    margin: 0;
   }
 
   section {
@@ -355,8 +357,6 @@ section {
   .sidebar {
     padding: 2rem;
     background: #333438 !important;
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
 		color: #ffffff !important;
   }
 
@@ -442,8 +442,6 @@ section {
   .content {
     padding: 3rem 5rem 3rem 2rem;
     background: #FFFFFF !important;
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
   }
 
   .content h1 {
