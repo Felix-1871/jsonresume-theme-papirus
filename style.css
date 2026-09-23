@@ -17,6 +17,7 @@ body {
   display:flex;
   /* .content comes first in resume.hbs so PDF text extractors read it first */
   flex-direction: row-reverse;
+  min-height: 29.7cm;
 }
 
 section {
@@ -53,7 +54,6 @@ section {
   background: #333438 !important;
   margin-bottom: 0;
   padding-bottom: 2rem !important;
-  height: 3000px;
 }
 
 .sidebar, .sidebar h1, .sidebar h2 {
@@ -325,6 +325,8 @@ section {
   #resume {
     overflow: hidden;
     border: none !important;
+    /* bootstrap's .row margins make the page wider than A4, and Chrome then shrinks it to fit */
+    margin: 0;
   }
 
   section {
@@ -359,8 +361,6 @@ section {
   .sidebar {
     padding: 2rem;
     background: #333438 !important;
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
 		color: #ffffff !important;
   }
 
@@ -446,8 +446,6 @@ section {
   .content {
     padding: 3rem 5rem 3rem 2rem;
     background: #FFFFFF !important;
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
   }
 
   .content h1 {
