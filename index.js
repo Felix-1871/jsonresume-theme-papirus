@@ -5,6 +5,12 @@ var luxon = require('luxon')
 
 luxon.Settings.defaultLocale = "pl"
 
+// Picks the Polish noun form: 'one' = 1, 'few' = 2-4, 22-24..., 'many' = 0, 5-21, 25-31...
+var polishPlural = new Intl.PluralRules('pl')
+function polishCount (n, forms) {
+  return `${n} ${forms[polishPlural.select(n)]}`
+}
+
 // Font Awesome icons are inlined as SVG paths: the icon font would put
 // private-use characters into the PDF text layer and confuse text extractors.
 var fontAwesomeDir = path.dirname(require.resolve('font-awesome/package.json'))
@@ -72,7 +78,6 @@ function render (resume) {
     },
 
     dateDiff: function (startDate, endDate) {
-      let text = ''
       startDate = luxon.DateTime.fromISO(startDate)
       if (endDate === null || endDate === '' || endDate === undefined) {
         endDate = luxon.DateTime.now()
@@ -85,34 +90,14 @@ function render (resume) {
       let years = dateDiff.years
       let months = dateDiff.months
 
-      switch (years%10) {
-        case 1:
-          text += `${years} rok`
-          break;
-        case years < 5:
-          text += `${years} lata`
-          break;
-        case 0:
-          break;
-        default:
-          text += `${years} lat`
+      let parts = []
+      if (years > 0) {
+        parts.push(polishCount(years, { one: 'rok', few: 'lata', many: 'lat' }))
       }
       if (months > 0) {
-        if (years > 0) {
-          text += ' '
-        }
-        switch (months%10) {
-        case 1:
-          text += `${months} miesiąc`
-          break;
-        case months < 5:
-          text += `${months} miesiące`
-          break;
-        default:
-          text += `${months} miesięcy`
+        parts.push(polishCount(months, { one: 'miesiąc', few: 'miesiące', many: 'miesięcy' }))
       }
-      }
-      return text
+      return parts.join(' ')
     }
   })
 
