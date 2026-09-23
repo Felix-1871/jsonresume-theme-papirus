@@ -11,11 +11,13 @@ body {
 }
 
 #resume {
-  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+	border-radius: 5px;
   border: 1px solid #C7C7C7;
   overflow: hidden;
+  min-height: 29.7cm;
 }
-
 section {
   margin-bottom: 5rem;
 }
@@ -48,8 +50,10 @@ section {
 .sidebar {
   padding: 2rem;
   background: #333438 !important;
-  margin-bottom: -99999px;
-  padding-bottom: 99999px;
+  height: 100% !important;
+  min-height: 29.7cm !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .sidebar, .sidebar h1, .sidebar h2 {
@@ -118,8 +122,7 @@ section {
 .content {
   padding: 5rem;
   background: #FFFFFF;
-  margin-bottom: -99999px;
-  padding-bottom: 99999px;
+  padding-bottom: 0 !important;
 }
 
 .content h1 {
